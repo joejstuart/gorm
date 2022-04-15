@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"log"
 	"reflect"
 	"regexp"
 	"strings"
@@ -111,7 +112,7 @@ func (m Migrator) AutoMigrate(values ...interface{}) error {
 							break
 						}
 					}
-
+					log.Printf("VALUE: %v, FIELD: %v, FOUNDCOLUMN: %v", value, field, foundColumn)
 					if foundColumn == nil {
 						// not found, add column
 						if err := tx.Migrator().AddColumn(value, dbName); err != nil {
